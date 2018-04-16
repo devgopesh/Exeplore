@@ -1,0 +1,81 @@
+.display-4 {
+	font-family: sans-serif;
+	margin-left: 460px;
+}
+
+.space {
+	margin-bottom: 10px;
+}
+
+.thumbnail {
+	height: 300px;
+	overflow: auto;
+}
+
+.thumbnail img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+#im {
+	width: 250px;
+	margin-left: 20px;
+	float: left;
+	border-radius: 50px;
+}
+
+.lead {
+	margin-left: 500px;
+}
+
+#s, #m, #c, #t, #b, #tet, #br, #hc, #h {
+	cursor: pointer;
+}
+
+#snake, #bob, #math, #tower, #hetrix, #cross, #breakout, #tetris, #hurdle {
+	margin-left: 50px;
+}
+
+button {
+	float: right;
+	width: 50px;
+	cursor: pointer;
+}
+
+#bb {
+	background-color: green;
+	border: none;
+}
+
+.jumbotron {
+	background-image: url('images/portable.jpg');
+}
+
+#victory-notification {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20%;
+  margin-left: 33%;
+  margin-top: 10%;
+}
+
+#victory-message {
+  margin: 15% auto 0 42%;
+  width: 25em;
+  padding: 1em;
+}
+
+#victory-message > h1{
+  text-align: center;
+  font: bold;
+  color: white;
+}
+
+#victory-message > h2 {
+  color: white;
+  text-align: center;
+}
+
+

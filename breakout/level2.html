@@ -1,0 +1,426 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Breakout Game</title>
+    <link rel="stylesheet" type="text/css" href="breakout.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+</head>
+<body>
+    <div class="contain">
+        <div class="leftpane">
+            <h1 id="exe">EXEPLORE 5.0</h1>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="1000" data-pause="hover">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1"></li>
+                  <li data-target="#myCarousel" data-slide-to="2"></li>
+                  <li data-target="#myCarousel" data-slide-to="3"></li>
+                  <li data-target="#myCarousel" data-slide-to="4"></li>
+                  <li data-target="#myCarousel" data-slide-to="5"></li>
+                  <li data-target="#myCarousel" data-slide-to="6"></li>
+                  <li data-target="#myCarousel" data-slide-to="7"></li>
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active" id="two">
+                        <img src="../images/math1.png" width="460" height="450">
+                        <div class="carousel-caption">
+                            <h3>2048</h3>
+                         </div>
+                    </div>
+
+                    <div class="item" id="snakeG">
+                        <img src="../images/snake.jpg" width="460" height="450">
+                        <div class="carousel-caption">
+                            <h3>Snake</h3>
+                         </div>
+                    </div>
+
+                    <div class="item" id="breakout">
+                        <img src="../images/index.png" width="460" height="450">
+                        <div class="carousel-caption">
+                            <h3>Break the Bars</h3>
+                         </div>
+                    </div>                  
+        
+                     <div class="item" id="tetris">
+                        <img src="../images/tetris.png" width="460" height="450">
+                        <div class="carousel-caption">
+                            <h3>Tetris</h3>
+                         </div>
+                    </div>
+
+                    <div class="item" id="cross">
+                        <img src="../images/cross.png" width="460" height="450">
+                        <div class="carousel-caption">
+                            <h3>Cross Moss</h3>
+                         </div>
+                    </div>
+
+                    <div class="item" id="tower">
+                        <img src="../images/tower-of-hanoi.jpg" width="460" height="450">
+                        <div class="carousel-caption">
+                            <h3>Tower of Hanoi</h3>
+                         </div>
+                    </div>
+
+                    <div class="item" id="hextris">
+                        <img src="../images/hetrix.jpg" width="460" height="450">
+                        <div class="carousel-caption">
+                            <h3>Hextris</h3>
+                         </div>
+                    </div>
+
+                    <div class="item" id="bob">
+                        <img src="../images/bob.png" width="460" height="450">
+                        <div class="carousel-caption">
+                            <h3>Bob the Builder</h3>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <h2 id="t"></h2>
+            <h2 id="tScore"></h2>
+        </div>
+
+        <div class="middlepane" id="canvas-block">
+            <h2>BREAK THE BARS</h2>
+            <canvas id="myCanvas" width="500" height="500"></canvas>
+            <div id="victory-notification">
+                <div id="victory-message">
+                    <h1>CONGRATS!</h1>
+                    <h3>You have cleared this level.</h3>
+                    <h3>Please proceed to next level.</h3>
+                </div>
+            </div>
+            <div id="victory-notification1">
+                <div id="victory-message1">
+                    <h1>GAME OVER!</h1>
+                    <h3>Click 'Play Again' to restart the game.</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="rightpane">
+            <h1 id="level1"></h1>
+            <h2 id="maxScore"></h2><br>
+            <div>
+                <h2 id="time"></h2>
+            </div>
+            <div id="level">
+                <h2><a href="level3.html" id="nLevel">Next Level</a></h2>
+                <h2><a href="level1.html" id="pLevel">Previous Level</a></h2>
+            </div>
+            <p id="pa"></p>
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModalBars">HELP</button>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="myModalBars" role="dialog">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Instructions</h4>
+                </div>
+                <div class="modal-body">
+                  <p>The games's objective is to make the ball hit all the bars in minimum possible time.</p>
+                  <p>Use the arrow keys or mouse to move the plank.</p>        
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var span = document.querySelector("#level1");
+        var timer = document.querySelector('#time');
+        var maxScore = document.querySelector('#maxScore');
+        var tScore = document.getElementById('tScore');
+        var pa = document.getElementById('pa');
+        var v = document.getElementById('victory-notification');
+        var v1 = document.getElementById('victory-notification1');
+        var c;
+        v.style.display = 'none';
+        v1.style.display = 'none';
+        var tScore = document.getElementById('tScore');
+        var x = JSON.parse(localStorage.getItem('highscores'));
+        if(x == null){
+            c = 0;
+        } else {
+            c = Number(x[0]);
+        }
+        var ts = Number(localStorage.getItem('maxMathScore')) + Number(localStorage.getItem('maxMathScoreS')) + Number(localStorage.getItem('maxMathScoreS2')) + Number(localStorage.getItem('maxMathScoreS3')) + Number(localStorage.getItem('maxMathBob')) + Number(localStorage.getItem('maxMathBreak')) + Number(localStorage.getItem('maxMathBreak2')) + Number(localStorage.getItem('maxMathBreak3')) + Number(localStorage.getItem('maxMathCross')) + Number(localStorage.getItem('maxMathCross2')) + Number(localStorage.getItem('maxMathCross3')) + Number(localStorage.getItem('maxMathScoreT')) + Number(localStorage.getItem('maxMathScoreT1')) + Number(localStorage.getItem('maxMathScoreT2')) + Number(localStorage.getItem('maxMathScoreT3')) + c;
+        tScore.textContent = "Total Score: " + ts;
+        var id, time = 1000, p;
+        timer.textContent = "Time: " + 0 + "s";
+        window.onload = function() {
+            var secs = 0;
+            id = setInterval(function(){ 
+                secs++; 
+                   timer.textContent = "Time: " + secs + "s";
+                    p= secs;
+            }, 1000);
+            var t = document.getElementById('t');
+            var idT = setInterval(function(){ 
+                var sec = localStorage.getItem('s');
+                var min = localStorage.getItem('m');
+                t.textContent = min + "m " + sec + "s";         
+                if(sec-- == 0){
+                    localStorage.setItem('s',59);
+                    localStorage.setItem('m',--min);
+                }
+                else 
+                    localStorage.setItem('s',sec);
+                if (min == 0 && sec == 0) {
+                        window.document.location.href = '../main.html';
+                }             
+            }, 1000);
+        };
+
+        if (localStorage.break2 >= 1)
+            maxScore.textContent = "Max Score: " + localStorage.getItem('maxMathBreak2');
+
+        span.textContent = "Level 2";
+
+        canvas.className = 'bg2';
+
+        function border() {
+            var gradient = ctx.createLinearGradient(0, 0, 650, 0);
+            gradient.addColorStop("0", "black");
+            gradient.addColorStop("0.5", "grey");
+            gradient.addColorStop("1.0", "black");
+
+            // Fill with gradient
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 9;
+            ctx.strokeRect(0, 0, 500, 500);
+        }
+    
+        var ballRadius = 10, score = 0, k = 0;
+        var x = canvas.width/2;
+        var y = canvas.height-30;
+        var dx = 4;
+        var dy = -3;
+        var paddleHeight = 14;
+        var paddleWidth = 70;
+        var paddleX = (canvas.width-paddleWidth)/2;
+        var rightPressed = false;
+        var leftPressed = false;
+        var brickRowCount = 5;
+        var brickColumnCount = 5;
+        var brickWidth = 75;
+        var brickHeight = 20;
+        var brickPadding = 23;
+        var brickOffsetTop = 30;
+        var brickOffsetLeft = 17;
+        var bricks = [];
+        var num =2; 
+        for(c=0; c<brickColumnCount; c++) {
+            bricks[c] = [];
+            for(r=0; r<brickRowCount; r++) {
+                bricks[c][r] = { x: 0, y: 0, status: 1 };
+            }
+        }
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+        document.addEventListener("mousemove", mouseMoveHandler, false);
+        function keyDownHandler(e) {
+            if(e.keyCode == 39) {
+                rightPressed = true;
+            }
+            else if(e.keyCode == 37) {
+                leftPressed = true;
+            }
+        }
+        function keyUpHandler(e) {
+            if(e.keyCode == 39) {
+                rightPressed = false;
+            }
+            else if(e.keyCode == 37) {
+                leftPressed = false;
+            }
+        }
+        function mouseMoveHandler(e) {
+            var relativeX = e.clientX - canvas.offsetLeft;
+            if(relativeX > 0 && relativeX < canvas.width) {
+                paddleX = relativeX - paddleWidth/2;
+            }
+        }
+        function collisionDetection() {
+            for(c=0; c<brickColumnCount; c++) {
+                for(r=0; r<brickRowCount; r++) {
+                    var b = bricks[c][r];
+                    if(b.status == 1) {
+                        if(x >= b.x && x <= b.x+brickWidth && y >= b.y && y <= b.y+brickHeight) {
+                            dy = -dy;
+                            b.status = 0;
+                            score++;
+                            if(score == brickRowCount*brickColumnCount) {
+                                if (localStorage.break2) {
+                                    localStorage.break2 = Number(localStorage.break2)+1;
+                                } else {
+                                    localStorage.break2 = 1;
+                                }
+                                if (localStorage.break2 === 1) {
+                                    localStorage.setItem('maxMathBreak2', (100-p)*10);    
+                                } else {
+                                    var q = localStorage.getItem('maxMathBreak2');
+                                    if ((100-p)*10 > q)
+                                      localStorage.setItem('maxMathBreak2', (100-p)*10);
+                                }
+                                k = 1;
+                                maxScore.textContent = "Max Score: " + localStorage.getItem('maxMathBreak2');
+                                /*var s = Number(localStorage.getItem('maxMathScoreS')) + Number(localStorage.getItem('maxMathScoreS2')) + Number(localStorage.getItem('maxMathScoreS3'));
+                                tScore.textContent = "Total Score: " + s;*/
+                                v.style.display = 'block';
+                                clearInterval(id);
+                                dy=0;
+                                dx=0;
+                                paddleX=0;
+                             
+                            }
+                        }
+                    }
+                }
+            }
+        }
+     
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+            ctx.lineWidth =3;
+            ctx.strokeStyle = "black";
+            ctx.stroke();
+            ctx.closePath();
+             ctx.beginPath();
+            ctx.arc(x, y, ballRadius-4, 0, Math.PI*2);
+            ctx.fillStyle = "grey";
+            ctx.fill();
+            ctx.closePath();
+        }
+        function drawPaddle() {
+            ctx.beginPath();
+            var grd =ctx.createLinearGradient(0,0,650,0);
+            grd.addColorStop(0,"grey");
+            grd.addColorStop(.8,"black");
+             grd.addColorStop(1,"grey");
+            ctx.fillStyle=grd;
+            ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+            ctx.fill();
+            ctx.closePath();
+        }
+        function drawBricks() {
+            for(c=0; c<brickColumnCount; c++) {
+                for(r=0; r<brickRowCount; r++) {
+                    if(bricks[c][r].status == 1) {
+                        var brickX = (r*(brickWidth+brickPadding))+brickOffsetLeft;
+                        var brickY = (c*(brickHeight+brickPadding))+brickOffsetTop;
+                        bricks[c][r].x = brickX;
+                        bricks[c][r].y = brickY;
+                        ctx.beginPath();
+                          var grd =ctx.createLinearGradient(0,0,700,0);
+            grd.addColorStop(0,"grey");
+            grd.addColorStop(.8,"black");
+             grd.addColorStop(1,"grey");
+            ctx.fillStyle=grd;
+                        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                        ctx.fill();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+       
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBricks();
+            drawBall();
+            drawPaddle();
+            collisionDetection();
+            border();
+            if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+                dx = -dx;
+            }
+            if(y + dy < ballRadius) {
+                dy = -dy;
+            }
+            else if(y + dy > canvas.height-paddleHeight) {
+                if(x >= paddleX && x <=paddleX + paddleWidth) {
+                    dy = -dy;
+                }
+                else {
+                    if(score< brickRowCount*brickColumnCount) {
+                        k = 1;
+                        clearInterval(id);
+                        v1.style.display = 'block';
+                        pa.textContent = 'Play Again';
+                        pa.addEventListener('click', function(){
+                             document.location.reload();
+                        });
+                    }
+                    else {
+                        x = canvas.width/2;
+                       y = canvas.height-30;
+                      
+                        paddleX = (canvas.width-paddleWidth)/2;
+                        paddleWidth = paddleWidth;
+                    }
+                }
+            }
+            if(rightPressed && paddleX < canvas.width-paddleWidth) {
+                paddleX += 7;
+            }
+            else if(leftPressed && paddleX > 0) {
+                paddleX -= 7;
+            }
+            x += dx;
+            y += dy;
+            if(k == 0)
+                requestAnimationFrame(draw);
+        }
+        draw();
+
+        document.querySelector('#two').addEventListener('click', function() {
+            window.document.location.href = '../2048/index.html';
+        });
+        document.querySelector('#snakeG').addEventListener('click', function() {
+            window.document.location.href = '../Snake/snake.html';
+        });
+        document.querySelector('#breakout').addEventListener('click', function() {
+            window.document.location.href = 'level1.html';
+        });
+        document.querySelector('#tetris').addEventListener('click', function() {
+            window.document.location.href = '../tetris/index.html';
+        });
+        document.querySelector('#cross').addEventListener('click', function() {
+            window.document.location.href = '../cross/level1.html';
+        });
+        document.querySelector('#exe').addEventListener('click', function(){
+            window.document.location.href = '../main.html';
+        });
+        document.querySelector('#tower').addEventListener('click', function() {
+            window.document.location.href = '../towers-of-hanoi-master/level1.html';
+        });
+        document.querySelector('#hextris').addEventListener('click', function() {
+            window.document.location.href = '../hextris/index.html';
+        });
+        document.querySelector('#bob').addEventListener('click', function() {
+            window.document.location.href = '../bob_the_builder/index.html';
+        });
+        document.querySelector('#exe').addEventListener('click', function(){
+            window.document.location.href = '../main.html';
+        });
+
+    </script>
+
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../bootstrap.min.js"></script>
+</body>
+</html>

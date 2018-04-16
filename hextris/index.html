@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<title>Hextris</title>
+		<link rel="icon" type="image/png" href="favicon.ico">
+		<link rel="stylesheet" href="style/fa/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="style/style.css">
+		<script type='text/javascript' src="vendor/hammer.min.js"></script>
+		<script type='text/javascript' src="vendor/js.cookie.js"></script>
+		<script type='text/javascript' src="vendor/jsonfn.min.js"></script>
+		<script type='text/javascript' src="vendor/keypress.min.js"></script>
+		<script type='text/javascript' src="vendor/jquery.js"></script>
+		<script type='text/javascript' src="js/save-state.js"></script>
+		<script type='text/javascript' src="js/view.js"></script>
+		<script type='text/javascript' src="js/wavegen.js"></script>
+		<script type='text/javascript' src="js/math.js"></script>
+		<script type='text/javascript' src="js/Block.js"></script>
+		<script type='text/javascript' src="js/Hex.js"></script>
+		<script type='text/javascript' src="js/Text.js"></script>
+		<script type='text/javascript' src="js/comboTimer.js"></script>
+		<script type='text/javascript' src="js/checking.js"></script>
+		<script type='text/javascript' src='js/update.js'></script>
+		<script type='text/javascript' src='js/render.js'></script>
+		<script type='text/javascript' src="js/input.js"></script>
+		<script type='text/javascript' src="js/main.js"></script>
+		<script type='text/javascript' src="js/initialization.js"></script>
+		<script type='text/javascript' charset='utf-8' src='cordova.js'></script>
+
+		<script src="vendor/sweet-alert.min.js"></script>
+		<link rel="stylesheet" href="style/rrssb.css"/>
+	</head>
+	<body>
+		<div class="contain">
+      		<div class="leftpane">
+        <h1 id="exe">EXEPLORE 5.0</h1>
+        <div class="slider-holder">
+          <span id="slider-image-1"></span>
+          <span id="slider-image-2"></span>
+          <span id="slider-image-3"></span>
+          <span id="slider-image-4"></span>
+          <span id="slider-image-5"></span>
+          <span id="slider-image-6"></span>
+          <span id="slider-image-7"></span>
+          <span id="slider-image-8"></span>          
+          <div class="image-holder">
+            <img src="../images/math1.png" class="slider-image" id="two"/>
+            <img src="../images/snake.jpg" class="slider-image" id="snakeG"/>
+            <img src="../images/tetris.png" class="slider-image" id="tetris1">            
+            <img src="../images/index.png" class="slider-image" id="breakout1" />
+            <img src="../images/cross.png" class="slider-image" id="cross">
+            <img src="../images/tower-of-hanoi.jpg" class="slider-image" id="tower">
+            <img src="../images/hetrix.jpg" class="slider-image" id="hextris">
+            <img src="../images/bob.png" class="slider-image" id="bob">
+          </div>
+          <div class="button-holder">
+              <a href="#slider-image-1" class="slider-change"></a>
+              <a href="#slider-image-2" class="slider-change"></a>
+              <a href="#slider-image-3" class="slider-change"></a>
+              <a href="#slider-image-4" class="slider-change"></a>
+              <a href="#slider-image-5" class="slider-change"></a>
+              <a href="#slider-image-6" class="slider-change"></a>
+              <a href="#slider-image-7" class="slider-change"></a>
+              <a href="#slider-image-8" class="slider-change"></a>             
+        </div>
+        </div>
+        <h2 id="t"></h2>
+        <h2 id="tScore"></h2>
+    </div>
+
+        <div class="middlepane" id="canvas-block">
+        	<h2 id="s">HEXTRIS</h2>
+        	<canvas id="canvas" width="500px" height="500px"></canvas>
+        	<div id="overlay" class="faded overlay"></div>
+			<div id='startBtn' ></div>
+			<div class="faded overlay"></div>
+			<img id="pauseBtn" src="./images/btn_pause.svg"/>
+			<img id='restartBtn' src="./images/btn_restart.svg"/>
+			
+			<div id="gameoverscreen">
+				<div id='container'>
+					<div id='gameOverBox' class='GOTitle'>GAME OVER</div>
+				</div>
+				<div id='bottomContainer'>
+					<img id='restart' src='./images/btn_restart.svg' height='57px'>
+				
+				<div id='buttonCont'>
+					<ul class="rrssb-buttons"></ul>
+				</div>
+			</div>
+		</div>
+      </div>
+
+      	<div class="rightpane">
+			<div id='highScoreInGameText'>
+				<h2 id='highScoreInGameTextHeader'>HIGH SCORE</h2>
+				<div id='currentHighScore'></div>
+			</div>
+			<button id="parent">HELP
+				<p id="popup">
+					The goal of Hextris is to stop blocks from leaving the inside of the outer gray hexagon.
+		          Press the right and left arrow keys to rotate the hexagon.Press the down arrow to speed up the block falling.
+		          Blocks will be cleared and points will be awareded when three or more blocks of the same colour are in connection with each other.
+				</p>
+			</button>
+      	</div>
+      </div>
+
+      	
+		<script type="text/javascript">
+
+			var tScore = document.getElementById('tScore');
+			var c;
+		var x = JSON.parse(localStorage.getItem('highscores'));
+		if(x == null){
+			c = 0;
+		} else {
+			c = Number(x[0]);
+		}
+        var ts = Number(localStorage.getItem('maxMathScore')) + Number(localStorage.getItem('maxMathScoreS')) + Number(localStorage.getItem('maxMathScoreS2')) + Number(localStorage.getItem('maxMathScoreS3')) + Number(localStorage.getItem('maxMathBob')) + Number(localStorage.getItem('maxMathBreak')) + Number(localStorage.getItem('maxMathBreak2')) + Number(localStorage.getItem('maxMathBreak3')) + Number(localStorage.getItem('maxMathCross')) + Number(localStorage.getItem('maxMathCross2')) + Number(localStorage.getItem('maxMathCross3')) + Number(localStorage.getItem('maxMathScoreT')) + Number(localStorage.getItem('maxMathScoreT1')) + Number(localStorage.getItem('maxMathScoreT2')) + Number(localStorage.getItem('maxMathScoreT3')) + c;
+        tScore.textContent = "Total Score: " + ts;
+
+			document.querySelector('#two').addEventListener('click', function() {
+			window.document.location.href = '../2048/index.html';
+		});
+		document.querySelector('#snakeG').addEventListener('click', function() {
+			window.document.location.href = '../Snake/snake.html';
+		});
+		document.querySelector('#breakout1').addEventListener('click', function() {
+			window.document.location.href = '../breakout/level1.html';
+		});
+		document.querySelector('#cross').addEventListener('click', function() {
+			window.document.location.href = '../cross/level1.html';
+		});		
+		document.querySelector('#tetris1').addEventListener('click', function() {
+			window.document.location.href = '../tetris/index.html';
+		});
+		document.querySelector('#tower').addEventListener('click', function() {
+			window.document.location.href = '../towers-of-hanoi-master/level1.html';
+		});
+		document.querySelector('#hextris').addEventListener('click', function() {
+			window.document.location.href = 'index.html';
+		});
+		document.querySelector('#bob').addEventListener('click', function() {
+			window.document.location.href = '../bob_the_builder/index.html';
+		});
+		document.querySelector('#exe').addEventListener('click', function(){
+			window.document.location.href = '../main.html';
+		});
+
+		window.onload = function() {
+			var t = document.getElementById('t');
+            var idT = setInterval(function(){ 
+                var sec = localStorage.getItem('s');
+                var min = localStorage.getItem('m');
+                t.textContent = min + "m " + sec + "s";         
+                if(sec-- == 0){
+                    localStorage.setItem('s',59);
+                    localStorage.setItem('m',--min);
+                }
+                else 
+                	localStorage.setItem('s',sec);
+                if (min == 0 && sec == 0) {
+                		window.document.location.href = '../main.html';
+                }             
+            }, 1000);
+		};
+		</script>
+		<script type="text/javascript" src='vendor/rrssb.min.js'></script>
+			
+	</body>
+</html>

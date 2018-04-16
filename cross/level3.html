@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cross Moss</title>
+	<link rel="stylesheet" type="text/css" href="ball.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+</head>
+<body>
+	<div class="contain">
+	  	<div class="leftpane">
+	    	<h1 id="exe">EXEPLORE 5.0</h1>
+	    	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="1000" data-pause="hover">
+			    <!-- Indicators -->
+			    <ol class="carousel-indicators">
+			      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			      <li data-target="#myCarousel" data-slide-to="1"></li>
+			      <li data-target="#myCarousel" data-slide-to="2"></li>
+			      <li data-target="#myCarousel" data-slide-to="3"></li>
+			      <li data-target="#myCarousel" data-slide-to="4"></li>
+			      <li data-target="#myCarousel" data-slide-to="5"></li>
+			      <li data-target="#myCarousel" data-slide-to="6"></li>
+			      <li data-target="#myCarousel" data-slide-to="7"></li>			      
+			    </ol>
+				<!-- Wrapper for slides -->
+			    <div class="carousel-inner" role="listbox">
+			      	<div class="item active" id="two">
+			        	<img src="../images/math1.png" width="460" height="450">
+			        	<div class="carousel-caption">
+          					<h3>2048</h3>
+       					 </div>
+			    	</div>
+
+			    	<div class="item" id="snakeG">
+			        	<img src="../images/snake.jpg" width="460" height="450">
+			        	<div class="carousel-caption">
+          					<h3>Snake</h3>
+       					 </div>
+			    	</div>
+
+					<div class="item" id="breakout">
+			        	<img src="../images/index.png" width="460" height="450">
+			        	<div class="carousel-caption">
+          					<h3>Break the Bars</h3>
+       					 </div>
+			    	</div>			      		    			      		
+
+			      	<div class="item" id="cross">
+			        	<img src="../images/cross.png" width="460" height="450">
+			        	<div class="carousel-caption">
+          					<h3>Cross Moss</h3>
+       					 </div>
+			    	</div>	
+
+			    	<div class="item" id="tetris">
+                        <img src="../images/tetris.png" width="460" height="450">
+                        <div class="carousel-caption">
+                            <h3>Tetris</h3>
+                         </div>
+                    </div>	
+
+                    <div class="item" id="tower">
+			        	<img src="../images/tower-of-hanoi.jpg" width="460" height="450">
+			        	<div class="carousel-caption">
+          					<h3>Tower of Hanoi</h3>
+       					 </div>
+			    	</div>
+
+			    	<div class="item" id="hextris">
+			        	<img src="../images/hetrix.jpg" width="460" height="450">
+			        	<div class="carousel-caption">
+          					<h3>Hextris</h3>
+       					 </div>
+			    	</div>
+
+			    	<div class="item" id="bob">
+			        	<img src="../images/bob.png" width="460" height="450">
+			        	<div class="carousel-caption">
+          					<h3>Bob the Builder</h3>
+       					 </div>
+			    	</div>
+	    		</div>
+	    	</div>
+	    	<h2 id="t"></h2>
+	    	<h2 id="tScore"></h2>
+	    </div>
+
+	  	<div class="middlepane" id="canvas-block">
+	  		<h2 id="s">CROSS MOSS</h2>
+	  			<canvas id="myCanvas" width="500" height="500"></canvas>
+	  			<div id="victory-notification">
+	      			<div id="victory-message">
+	        			<h1>CONGRATS!</h1>
+	        			<h3>You have cleared this level.</h3>
+	      			</div>
+	    		</div>
+	  	</div>
+
+	  	<div class="rightpane">
+	  		<h1 id="level1"></h1>
+	  		<h2 id="maxScore"></h2><br>
+	  		<div>
+	    		<h2 id="timer"></h2>
+	    	</div>
+	    	<div id="level">
+                <h2><a href="level2.html" id="pLevel">Previous Level</a></h2>
+            </div>
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModalC">HELP</button>
+	    </div>
+	</div>
+
+	<div class="modal fade" id="myModalC" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Instructions</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>The games's objective is to make the box reach the other end of the wall in minimum possible time.</p>
+		          <p>Use the arrow keys to move the box horizontally or vertically.</p>
+		          <p>Mimimum time will give maximum score.</p>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+
+	<script>
+		var canvas = document.getElementById("myCanvas"),
+			ctx	   = canvas.getContext("2d");
+
+		var tScore = document.getElementById('tScore');
+		var c;
+		var x = JSON.parse(localStorage.getItem('highscores'));
+		if(x == null){
+			c = 0;
+		} else {
+			c = Number(x[0]);
+		}
+        var ts = Number(localStorage.getItem('maxMathScore')) + Number(localStorage.getItem('maxMathScoreS')) + Number(localStorage.getItem('maxMathScoreS2')) + Number(localStorage.getItem('maxMathScoreS3')) + Number(localStorage.getItem('maxMathBob')) + Number(localStorage.getItem('maxMathBreak')) + Number(localStorage.getItem('maxMathBreak2')) + Number(localStorage.getItem('maxMathBreak3')) + Number(localStorage.getItem('maxMathCross')) + Number(localStorage.getItem('maxMathCross2')) + Number(localStorage.getItem('maxMathCross3')) + Number(localStorage.getItem('maxMathScoreT')) + Number(localStorage.getItem('maxMathScoreT1')) + Number(localStorage.getItem('maxMathScoreT2')) + Number(localStorage.getItem('maxMathScoreT3')) + c;
+        tScore.textContent = "Total Score: " + ts;
+
+		var timer = document.querySelector('#timer');
+		var span = document.querySelector("#level1");
+		var maxScore = document.querySelector('#maxScore');
+		var tScore = document.getElementById('tScore');
+		var v = document.getElementById('victory-notification');
+		v.style.display = 'none';
+
+		span.textContent = "Level 3";
+		canvas.className = 'bg3';
+
+		var id, p;
+    	timer.textContent = "Time: " + 0 + "s";
+	    window.onload = function() {
+	        var secs = 0;
+	        id = setInterval(function(){ 
+	            secs++; 
+	            if(secs <= 150){
+	            	timer.textContent = "Time: " + secs + "s";
+	            	p = secs;
+	            }
+	        }, 1000);
+	        var t = document.getElementById('t');
+            var idT = setInterval(function(){ 
+                var sec = localStorage.getItem('s');
+                var min = localStorage.getItem('m');
+                t.textContent = min + "m " + sec + "s";         
+                if(sec-- == 0){
+                    localStorage.setItem('s',59);
+                    localStorage.setItem('m',--min);
+                }
+                else 
+                	localStorage.setItem('s',sec);
+                if (min == 0 && sec == 0) {
+                		window.document.location.href = '../main.html';
+                }             
+            }, 1000);
+	    };
+
+	    if (localStorage.cross3 >= 1)
+            maxScore.textContent = "Max Score: " + localStorage.getItem('maxMathCross3');
+
+	    var myGamePiece = new Array(), myObstacle,
+	    	mySquare, increment = new Array(), j = -50, increment1 = new Array();
+
+	    var myGameArea = {
+	        start : function() {
+	            this.interval = setInterval(updateGameArea, 100);
+	            window.addEventListener('keydown', function (e) {
+	                myGameArea.key = e.keyCode;
+	            })
+	            window.addEventListener('keyup', function (e) {
+	                myGameArea.key = false;
+	    		})
+	        },
+	        clear : function() {
+	            ctx.clearRect(0, 0, 500, 500);
+	        },
+	        clearinterval : function() {
+	            this.interval = clearInterval(this.interval);
+	        }
+	    }
+
+	    startGame();
+
+	    function startGame() {
+	        for(var i = 0; i <= 5 ; i++) {
+		        if(i == 2 || i == 4)
+		            j+=80;
+		        else
+		            j+=50;
+		        myGamePiece.push({
+		            x: Math.floor((Math.random()*47))*10,
+		            y: j
+		        });
+		    }
+		    for(var i = 0; i < 4; i++) {
+		        if (i == 0) {
+		            myGamePiece.push({
+		                x: myGamePiece[0].x,
+		                y: myGamePiece[0].y
+		            });
+		        }
+		        else if (i == 1 || i == 2) {
+		            myGamePiece.push({
+		                x: myGamePiece[i+1].x,
+		                y: myGamePiece[i+1].y
+		            });
+		        }
+		        else {
+		            myGamePiece.push({
+		                x: myGamePiece[5].x,
+		                y: myGamePiece[5].y
+		            });   
+		        }
+		    }
+		    for(var i = 0;i < myGamePiece.length; i++) {
+		        if (i <= 5) {
+		            if(i%2 === 0) {
+		                increment.push(10);
+		                increment1.push(10);
+		            }
+		            else {
+		                increment.push(-10);
+		                increment1.push(-10);
+		            }
+		        } else {
+		            increment.push(10);
+		            increment1.push(10);
+		        }
+		    }
+    		myObstacle = new component(30, 30, "blue", 250, 470, "text");
+    		myGameArea.start();
+	    }
+
+	    function component(width, height, color, x, y, type) {
+	        this.gamearea = myGameArea;
+	        this.type = type;
+	        this.width = width;
+	        this.height = height;
+	        this.x = x;
+	        this.y = y;    
+	        this.update = function(){
+	            if (this.type == "text") {
+	                var grd = ctx.createLinearGradient(0, 0, 700, 0);
+		            grd.addColorStop(0,"grey");
+		            grd.addColorStop(.8,"orange");
+		            grd.addColorStop(1,"yellow");
+		            ctx.fillStyle = grd;
+		            ctx.fillRect(this.x, this.y, this.width, this.height);
+	            } else if (this.type == "circle") {
+	            	ctx.beginPath();
+	            	ctx.arc(this.width, this.height, this.x, this.y, 2*Math.PI, false);
+	            	ctx.fillStyle = color;
+	            	ctx.fill();
+	            	ctx.stroke();
+	            } else {
+	                var grd = ctx.createLinearGradient(0, 0, 700, 0);
+		            grd.addColorStop(0,"red");
+		            grd.addColorStop(.8,"blue");
+		            grd.addColorStop(1,"yellow");
+		            ctx.fillStyle = grd;
+		            ctx.fillRect(this.x, this.y, this.width, this.height);
+	            }
+	        }
+	    }
+
+	    function updateGameArea(){
+
+	        if (myObstacle.y === -30) {
+	            clearInterval(id);
+	            myGameArea.clear();
+	            myGameArea.clearinterval();
+	            if (localStorage.cross3) {
+                    localStorage.cross3 = Number(localStorage.cross3)+1;
+                    } else {
+                        localStorage.cross3 = 1;
+                    }
+                    if (localStorage.cross3 === 1) {
+                        localStorage.setItem('maxMathCross3', (150-p)*10);    
+                    } else {
+                        var q = localStorage.getItem('maxMathCross3');
+                        if ((150-p)*10 > q)
+                          localStorage.setItem('maxMathCross3', (150-p)*10);
+                    }
+                    maxScore.textContent = "Max Score: " + localStorage.getItem('maxMathCross3');
+                    /*var s = Number(localStorage.getItem('maxMathCross')) + Number(localStorage.getItem('maxMathCross2')) + Number(localStorage.getItem('maxMathCross3'));
+					tScore.textContent = "Total Score: " + s;*/
+					v.style.display = 'block';
+	        }
+	        
+	        for(var i = 0; i< myGamePiece.length ; i++) {
+		        if (i <=5 ) {
+		            if(myObstacle.y <= myGamePiece[i].y + 30 && myObstacle.y >= myGamePiece[i].y) {
+		                if(increment[i] > 0){
+		                    if(myObstacle.x > myGamePiece[i].x)
+		                        increment[i]=20;
+		                    else
+		                        increment[i]=-20;
+		                }
+		                else {
+		                    if(myObstacle.x > myGamePiece[i].x)
+		                        increment[i]=20;
+		                    else
+		                        increment[i]=-20;
+		                }
+		            }
+		            else {
+		                if(increment[i] > 0)
+		                    increment[i]=10;
+		                else
+		                    increment[i]=-10;
+		            }
+		        }
+		    }
+
+		    for(var i = 0;i < myGamePiece.length; i++) {
+		        if (myObstacle.y === myGamePiece[i].y+30) {
+		            if (myObstacle.x+30>=myGamePiece[i].x && myObstacle.x+30<=myGamePiece[i].x+30) {
+		                location.reload();
+		            }
+		            if (myObstacle.x>=myGamePiece[i].x && myObstacle.x<=myGamePiece[i].x+30) {
+		                location.reload();
+		            }
+		        }
+		        if ((myObstacle.x+30 >= myGamePiece[i].x && myObstacle.x+30 <= myGamePiece[i].x+30 && myObstacle.y>=myGamePiece
+		            [i].y && myObstacle.y<=myGamePiece[i].y+30)){
+		            location.reload();
+		        }
+		        if ((myObstacle.x <= myGamePiece[i].x+30  && myObstacle.x >= myGamePiece[i].x && myObstacle.y>=myGamePiece
+		            [i].y && myObstacle.y<=myGamePiece[i].y+30)){
+		            location.reload();;
+		        }
+		        if ((myGamePiece[i].x+30 >= myObstacle.x && myGamePiece[i].x+30 <= myObstacle.x && myGamePiece[i].y>=
+		            myObstacle.y && myGamePiece[i].y<=myObstacle.y+30)){
+		            location.reload();
+		        }
+		       if ((myGamePiece[i].x >= myObstacle.x && myGamePiece[i].x <= myObstacle.x+30 && myGamePiece[i].y>=
+		            myObstacle.y && myGamePiece[i].y<=myObstacle.y+30)){
+		            location.reload();
+		        }
+		    }
+
+			for(var i = 0; i < myGamePiece.length; i++){
+		        if (i <= 5) {
+		            if(i%2 == 0) {
+		                myGamePiece[i].x+=increment[i];
+		                if (myGamePiece[i].x + 30 >= 500 || myGamePiece[i].x <= 0) {
+		                    increment[i] = -increment[i];
+		                }
+		            }
+		            else {
+		                myGamePiece[i].x+=increment[i];
+		                if (myGamePiece[i].x + 30 >= 500 || myGamePiece[i].x <= 0) {
+		                    increment[i] = -increment[i];
+		                }
+		            }
+		        }
+		        else if(i == 6){
+		            myGamePiece[i].x+=increment1[i];
+		            myGamePiece[i].y+=increment[i];
+		            if (myGamePiece[i].x + 30 >= 500) {
+		                increment1[i] = -increment1[i];
+		            }
+		            if (myGamePiece[i].y + 30 >= 500) {
+		                increment[i] = -increment[i];
+		            }
+		            if (myGamePiece[i].x <= 0) {
+		                increment1[i] = -increment1[i];
+		            }
+		            if (myGamePiece[i].y <= 0) {
+		                increment[i] = -increment[i];
+		            }
+		        }
+		        else if(i == 7) {
+		            myGamePiece[i].x-=increment1[i];
+		            myGamePiece[i].y+=increment[i];
+		            if (myGamePiece[i].x + 30 >= 500) {
+		                increment1[i] = -increment1[i];
+		            }
+		            if (myGamePiece[i].y + 30 >= 500) {
+		                increment[i] = -increment[i];
+		            }
+		            if (myGamePiece[i].x <= 0) {
+		                increment1[i] = -increment1[i];
+		            }
+		            if (myGamePiece[i].y <= 0) {
+		                increment[i] = -increment[i];
+		            }
+		        }
+		        else if(i == 8) {
+		            myGamePiece[i].x-=increment1[i];
+		            myGamePiece[i].y-=increment[i];
+		            if (myGamePiece[i].x + 30 >= 500) {
+		                increment1[i] = -increment1[i];
+		            }
+		            if (myGamePiece[i].y + 30 >= 500) {
+		                increment[i] = -increment[i];
+		            }
+		            if (myGamePiece[i].x <= 0) {
+		                increment1[i] = -increment1[i];
+		            }
+		            if (myGamePiece[i].y <= 0) {
+		                increment[i] = -increment[i];
+		            }
+		        }
+		        else if(i == 9) {
+		            myGamePiece[i].x+=increment1[i];
+		            myGamePiece[i].y-=increment[i];
+		            if (myGamePiece[i].x + 30 >= 500) {
+		                increment1[i] = -increment1[i];
+		            }
+		            if (myGamePiece[i].y + 30 >= 500) {
+		                increment[i] = -increment[i];
+		            }
+		            if (myGamePiece[i].x <= 0) {
+		                increment1[i] = -increment1[i];
+		            }
+		            if (myGamePiece[i].y <= 0) {
+		                increment[i] = -increment[i];
+		            }
+		        }
+		    }
+
+		    if (myGameArea.key && myGameArea.key == 37) {
+		        if(myObstacle.x == 0)
+		            myObstacle.x=0;
+		        else
+		            myObstacle.x-=10;
+		    }
+		    if (myGameArea.key && myGameArea.key == 39) {
+		        if(myObstacle.x == 470)
+		            myObstacle.x=470;
+		        else
+		            myObstacle.x+=10;
+		    }
+		    if (myGameArea.key && myGameArea.key == 38) {
+		        myObstacle.y-=10;
+		    }
+		    if (myGameArea.key && myGameArea.key == 40) {
+		        if(myObstacle.y == 470)
+		            myObstacle.y = 470;
+		        else
+		            myObstacle.y+=10;
+		    }
+
+			myGameArea.clear();
+		    myObstacle.update();
+		    for (var i = 0; i < myGamePiece.length; i++){
+		        mySquare = new component(30, 30, "red", myGamePiece[i].x, myGamePiece[i].y);
+		        mySquare.update();
+		    }
+	        
+	    }
+
+		document.querySelector('#two').addEventListener('click', function() {
+			window.document.location.href = '../2048/index.html';
+		});
+		document.querySelector('#snakeG').addEventListener('click', function() {
+			window.document.location.href = '../Snake/snake.html';
+		});
+		document.querySelector('#breakout').addEventListener('click', function() {
+			window.document.location.href = '../breakout/level1.html';
+		});		
+		document.querySelector('#cross').addEventListener('click', function() {
+			window.document.location.href = 'level1.html';
+		});
+		document.querySelector('#tetris').addEventListener('click', function() {
+            window.document.location.href = '../tetris/index.html';
+        });
+        document.querySelector('#tower').addEventListener('click', function() {
+			window.document.location.href = '../towers-of-hanoi-master/level1.html';
+		});
+		document.querySelector('#hextris').addEventListener('click', function() {
+			window.document.location.href = '../hextris/index.html';
+		});
+		document.querySelector('#bob').addEventListener('click', function() {
+			window.document.location.href = '../bob_the_builder/index.html';
+		});
+		document.querySelector('#exe').addEventListener('click', function(){
+			window.document.location.href = '../main.html';
+		});
+
+	</script>
+
+	<script type="text/javascript" src="../jquery.min.js"></script>
+	<script type="text/javascript" src="../bootstrap.min.js"></script>
+</body>
+</html>

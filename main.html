@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Exeplore5.0</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body style="background-color: rgba(17,30,108,0.3);">
+	<div class="jumbotron" style="height: 350px; font-family: sans-serif;">
+		<img src="images/exe.png" id="im">
+		<h1 class="display-4" style="color: rgba(130,180,40,0.8);">EXEPLORE 5.0</h1>
+  		<p class="lead" style="color: white;">Welcome to the world of fun games!</p>
+  	</div>
+
+	<div class="container">
+  	  <div class="row text-center">
+  	  	<div class="col-sm-4">
+    		<div class="thumbnail" style="background-color: rgba(218,165,32,0.4);">
+        		<img src="images/bob.png" id="b">
+        		<div class="space"></div>
+    			<p>
+					<a href="#" id="bob" class="btn btn-primary active">BOB THE BUILDER</a>
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModalB" id="bb">HELP</button>
+				</p>
+			</div>
+    	</div>
+    	<div class="col-sm-4">
+	     	<div class="thumbnail" style="background-color: rgba(255,127,80,0.6);">
+	      		<img src="images/hetrix.jpg" id="h">
+	      		<div class="space"></div>
+    			<p>
+					<a href="#" id="hetrix" class="btn btn-primary active">HEXTRIS</a>
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModalH" id="bb">HELP</button>
+				</p>
+			</div>
+	    </div>
+	    <div class="col-sm-4">
+	     	<div class="thumbnail" style="background-color: rgba(244,164,96,0.6);">
+	      		<img src="images/cross.png" id="c">
+	      		<div class="space"></div>
+    			<p>
+					<a href="#" id="cross" class="btn btn-primary active">CROSS MOSS</a>
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModalC" id="bb">HELP</button>
+				</p>
+			</div>
+	    </div>
+  	  </div>
+
+  	  <div class="row text-center">
+	    <div class="col-sm-4">
+	    	<div class="thumbnail" style="background-color: lightblue">
+	      		<img src="images/snake.jpg" id="s">
+	      		<div class="space"></div>
+    			<p>
+					<a href="#" id="snake" class="btn btn-primary active">SNAKE</a>
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" id="bb">HELP</button>
+				</p>
+			</div>
+    	</div>
+
+    	<div class="col-sm-4">
+    		<div class="thumbnail" style="background-color: rgba(147,112,219,0.6);">
+        		<img src="images/math1.png" id="m">
+        		<div class="space"></div>
+    			<p>
+					<a href="#" id="math" class="btn btn-primary active">2048</a>
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModalM" id="bb">HELP</button>
+				</p>
+			</div>
+    	</div>
+    	<div class="col-sm-4">
+	    	<div class="thumbnail" style="background-color: rgba(192,192,192,0.6);">
+	      		<img src="images/tower-of-hanoi.jpg" id="t">
+	      		<div class="space"></div>
+    			<p>
+					<a href="#" id="tower" class="btn btn-primary active">TOWER OF HANOI</a>
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModalT" id="bb">HELP</button>
+				</p>
+			</div>
+    	</div>
+  	  </div>
+
+  	  <div class="row text-center">
+	    <div class="col-sm-4">
+	     	<div class="thumbnail" style="background-color: rgba(221,160,221,0.4);">
+	        	<img src="images/index.png" id="br">
+	        	<div class="space"></div>
+	    		<p>
+					<a href="#" id="breakout" class="btn btn-primary active">BREAK THE BARS</a>
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModalBars" id="bb">HELP</button>
+				</p>
+			</div>
+	    </div>
+    	<div class="col-sm-4">
+	    	<div class="thumbnail" style="background-color: rgba(255,222,173,0.6);">
+	      		<img src="images/tetris.png" id="tet">
+	      		<div class="space"></div>
+    			<p>
+					<a href="#" id="tetris" class="btn btn-primary active">TETRIS</a>
+					<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModalTetris" id="bb">HELP</button>
+				</p>
+			</div>
+    	</div>	    
+  	  </div>
+  	  		<!-- Modal -->
+		  <div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Instructions</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>Level 1: You will get score of +20 for eating the food.</p>
+		          <p>Level 2: You will get score of +35 for eating the food.</p>
+		          <p>Level 3: You will get score of +50 for eating the food.</p>
+		          <p>Use the arrow keys for movement of snake. Max score will be on the basis of how much snake eat the food.</p>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+
+		  <div class="modal fade" id="myModalH" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Instructions</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>The goal of Hextris is to stop blocks from leaving the inside of the outer gray hexagon.</p>
+		          <p>Press the right and left arrow keys to rotate the hexagon.Press the down arrow to speed up the block falling.</p>
+		          <p>Blocks will be cleared and points will be awareded when three or more blocks of the same colour are in connection with each other.</p>
+		          <p>Max score will keep increasing unless your any hexagon side is filled.</p>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+
+		<div class="modal fade" id="myModalT" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Instructions</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>Your objective in Towers of Hanoi is simple: move your entire stack of disks from the first tower to one of the other two towers.</p>
+		          <p>There's only one catch—you may not place a larger disk on top of a smaller one and you have to complete it by taking minimum time.</p>
+		          <p>Max time for Level 1 is 80s, Level 2 is 250s and Level 3 is 500s.</p>
+		          <p>Use mouse to move the disks.</p>		     
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+
+		  <div class="modal fade" id="myModalM" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Instructions</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>The game's objective is to slide numbered tiles on a grid to combine them to create a tile with the number 2048. However you can keep playing the game creating tiles with larger numbers.</p>
+		          <p>Tiles will slide smoothly when a player moves them using the four arrow keys.</p>
+		          <p> Every turn, a new tile will randomly appear in an empty spot on the board with a value of either 2 or 4.</p>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+
+		  <div class="modal fade" id="myModalB" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Instructions</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>The game's objective is to make a bulding as tall as possible with the help of 50 crates.</p>
+		          <p>To place a crate at a specific position just click the mouse button.</p>
+		          <p>Score will be the maximum height of the building at that instant.</p>
+		          <p>Max score will be 500.</p>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+
+		  <div class="modal fade" id="myModalC" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Instructions</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>The games's objective is to make the box reach the other end of the wall in minimum possible time.</p>
+		          <p>Use the arrow keys to move the box horizontally or vertically.</p>
+		          <p>Max time for Level 1 is 50s, Level 2 is 100s and Level 3 is 150s.</p>
+		          <p>Mimimum time will give maximum score.</p>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+
+		  <div class="modal fade" id="myModalBars" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Instructions</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>The games's objective is to make the ball hit all the bars in minimum possible time.</p>
+		          <p>Use the arrow keys or mouse to move the plank.</p>		
+		          <p>Mimimum time will give maximum score.</p>	   
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+
+		  <div class="modal fade" id="myModalTetris" role="dialog">
+		    <div class="modal-dialog modal-sm">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Instructions</h4>
+		        </div>
+		        <div class="modal-body">
+		          <p>The primary way to score points in Tetris is to move and spin the pieces so that they fill horizontal row within the Matrix.</p>
+		          <p>Use the left and right arrow to move the pieces.</p>
+		          <p>Use the up arrow key to rotate the pieces and the down arrow key to speed up the piece.</p>
+		          <p>Max score will increase if rows are formed.</p>		   
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>		  
+
+		  <div id="victory-notification">
+      			<div id="victory-message">
+        			<h1>You scored</h1>
+        			<h2 id="tScore"></h2> 
+      			</div>
+    		</div>
+
+	<script>
+		
+		//localStorage.setItem('m',89);
+		//localStorage.setItem('s',60);
+		var v = document.querySelector('#victory-notification');
+		v.style.display = 'none';
+		if (localStorage.time) {
+            localStorage.time = Number(localStorage.time)+1;
+        } else {
+            localStorage.time = 1;
+        }
+        if(localStorage.time == 1){
+			localStorage.setItem('m',89);
+			localStorage.setItem('s',60);
+        }
+        if (localStorage.time > 1) {
+            var idT = setInterval(function(){ 
+                var sec = localStorage.getItem('s');
+                var min = localStorage.getItem('m');
+                if (min == 0 && sec == 0) {
+                	var c;
+                	var x = JSON.parse(localStorage.getItem('highscores'));
+                	if(x.length == 0){
+						c = 0;
+					} else {
+						c = Number(x[0]);
+					}
+                    var ts = Number(localStorage.getItem('maxMathScore')) + Number(localStorage.getItem('maxMathScoreS')) + Number(localStorage.getItem('maxMathScoreS2')) + Number(localStorage.getItem('maxMathScoreS3')) + Number(localStorage.getItem('maxMathBob')) + Number(localStorage.getItem('maxMathBreak')) + Number(localStorage.getItem('maxMathBreak2')) + Number(localStorage.getItem('maxMathBreak3')) + Number(localStorage.getItem('maxMathCross')) + Number(localStorage.getItem('maxMathCross2')) + Number(localStorage.getItem('maxMathCross3')) + Number(localStorage.getItem('maxMathScoreT')) + Number(localStorage.getItem('maxMathScoreT1')) + Number(localStorage.getItem('maxMathScoreT2')) + Number(localStorage.getItem('maxMathScoreT3')) + c;
+                v.style.display = 'block';
+                tScore.textContent = ts;
+                }
+                if(sec-- == 0){
+                    localStorage.setItem('s',59);
+                    localStorage.setItem('m',--min);
+                }
+                else 
+                    localStorage.setItem('s',sec);
+                if (min == 0 && sec == 0) {
+                    v.style.display = 'block';
+                	tScore.textContent = ts;
+                }          
+            }, 1000);
+        }
+	</script>
+
+	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="bootstrap.min.js"></script>
+</body>
+</html>

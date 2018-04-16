@@ -1,0 +1,194 @@
+canvas {
+    border:1px solid #d3d3d3;
+    display: block;
+    margin: 0 auto;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.contain {
+  width: 100%;
+  height: 100%;
+}
+
+#pa, #pa1, #pa2 {
+  color: red;
+}
+
+.leftpane {
+    width: 30%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+    background-image: url('../images/images.jpg');
+    background-color: rgba(128, 128, 128, 0.5);
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.middlepane {
+    width: 50%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+    background-image: url('../images/games.jpg');
+    background-color: lightblue;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.rightpane {
+  width: 20%;
+  height: 100%;
+  position: relative;
+  float: right;
+  background-size: cover;
+  background-image: url('../images/background.jpg');
+  background-color: rgba(255, 179, 179, 0.5);
+  border-collapse: collapse;
+  text-align: center;
+}
+
+#s {
+  color: rgba(100,150,250,0.8);
+}
+
+#tScore {
+  margin-top: 20px;
+  color: black;
+  text-align: center;
+}
+
+#t {
+  margin-top: 70px;
+  color: black;
+  text-align: center;
+}
+
+#score {
+	margin-top: 50px;
+	color: rgba(255, 0, 0, 0.6);
+}
+
+#level1 {
+  color: rgba(189,183,107,1);
+}
+
+#maxScore {
+	color: rgba(255,127,80,0.9);
+}
+
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+}
+
+#myCarousel {
+	margin-top: 50px;
+}
+
+#exe {
+	color: rgba(124, 10, 22, 1);
+  cursor: pointer;
+}
+
+#level {
+  margin-top: 50px; 
+  margin-bottom: 25px;
+}
+
+#pa {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#pa1 {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#pa2 {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.item , #nLevel , #pLevel , #dLevel {
+	cursor: pointer;
+}
+
+#exe:hover, #nLevel:hover, #pLevel:hover, #dLevel:hover, #pa:hover, #pa1:hover, #pa2:hover {
+  text-decoration: underline;
+}
+
+.bg1 {
+	background: url("images/img1.png") repeat;
+}
+
+.bg2 {
+	background: url("images/concrete_wall_2.png");	
+	background-size: 500px 500px;
+}
+
+.bg3 {
+  background: url("images/light-veneer.png");  
+  background-size: 500px 500px;
+}
+
+@media (max-width:   800px)  { 
+  .leftpane{
+    display: block;
+    float: none;
+    width: 100%;
+  }
+  .rightpane {
+    display: block;
+    float: none;
+    width: 100%;
+    text-align: center;
+  }
+  .middlepane {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+}
+
+#victory-notification {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20%;
+  margin-left: 33%;
+  margin-top: 10%;
+}
+
+#victory-message {
+  margin: 15% auto 0 42%;
+  width: 25em;
+  padding: 1em;
+  background: grey;
+}
+
+#victory-message > h1{
+  text-align: center;
+  font: bold;
+  color: white;
+}
+
+#victory-message > h3 {
+  color: white;
+}
+
+#parent #popup {
+  display: none;
+}
+
+#parent:hover #popup {
+  display: block;
+}
+

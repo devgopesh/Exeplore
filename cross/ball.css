@@ -1,0 +1,165 @@
+canvas {
+    border:1px solid #d3d3d3;
+    display: block;
+    margin: 0 auto;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: lightgrey;
+}
+
+.contain {
+  width: 100%;
+  height: 100%;
+}
+
+.leftpane {
+    width: 30%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+    background-image: url('../images/images.jpg');
+    background-color: rgba(128, 128, 128, 0.5);
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.middlepane {
+    width: 50%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+  background-image: url('../images/black.jpg');
+    background-color: lightblue;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.rightpane {
+  width: 20%;
+  height: 100%;
+  position: relative;
+  float: right;
+  background-size: cover;
+  background-image: url('../images/background.jpg');
+  background-color: rgba(255, 179, 179, 0.5);
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+}
+
+#s {
+  color: rgba(255,250,250,0.8);
+}
+
+#myCarousel {
+	margin-top: 50px;
+}
+
+#timer {
+	margin-top: 50px;
+	color: rgba(255, 0, 0, 0.6);
+}
+
+#t {
+  margin-top: 70px;
+  color: black;
+  text-align: center;
+}
+
+#tScore {
+  margin-top: 20px;
+  color: black;
+  text-align: center;
+}
+
+#exe {
+	color: rgba(124, 10, 22, 1);
+  cursor: pointer;
+}
+
+#level {
+  margin-top: 50px; 
+}
+
+#level1 {
+  color: rgba(189,183,107,1);
+}
+
+#maxScore {
+  color: rgba(255,127,80,0.9);
+}
+
+.item , #nLevel , #pLevel , #dLevel {
+	cursor: pointer;
+}
+
+#exe:hover, #nLevel:hover, #pLevel:hover, #dLevel:hover {
+  text-decoration: underline;
+}
+
+.bg1 {
+	background: url("images/wormz.png") repeat;
+}
+
+.bg2 {
+	background: url("images/bgrnd2.jpeg");
+	background-size: 500px 500px;	
+}
+
+.bg3 {
+	background: url("images/concrete_wall_2.png");
+}
+
+#victory-notification {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20%;
+  margin-left: 33%;
+  margin-top: 10%;
+}
+
+#victory-message {
+  margin: 15% auto 0 42%;
+  width: 25em;
+  padding: 1em;
+  background: grey;
+}
+
+#victory-message > h1{
+  text-align: center;
+  font: bold;
+  color: white;
+}
+
+#victory-message > h3 {
+  color: white;
+}
+
+@media (max-width:   800px)  { 
+  .leftpane{
+    display: block;
+    float: none;
+    width: 100%;
+  }
+  .rightpane {
+    display: block;
+    float: none;
+    width: 100%;
+    text-align: center;
+  }
+  .middlepane {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+}

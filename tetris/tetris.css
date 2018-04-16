@@ -1,0 +1,278 @@
+body      { font-family: Helvetica, sans-serif; }
+#tetris   { margin-left: 80px; border: 4px solid black; border-radius: 10px; background-color: #F8F8F8;  width: 500px; height: 500px}
+#stats    { display: inline;  }
+#canvas   { display: inline; vertical-align: top; background: url(texture.jpg); box-shadow: 10px 10px 10px #999; border: 2px solid #333; }
+#menu     { display: inline; vertical-align: top; position: relative; }
+#menu p   { margin: 0.5em 0; text-align: center; }
+#menu p a { text-decoration: none; color: black; }
+#upcoming { margin-left: 20px; display: block;  background-color: #E0E0E0; float: left;}
+#score    { color: red; font-weight: bold; vertical-align: middle; }
+#sc       {margin-top: 10px;}
+#rows     { color: blue; font-weight: bold; vertical-align: middle; }
+#stats    { position: absolute; bottom: 10em; right: 5em; }
+
+@media screen and (min-width:   0px) and (min-height:   0px)  { #tetris { font-size: 0.75em; width: 250px; } #menu { width: 100px; height: 200px; } #upcoming { width:  50px; height:  50px; } #canvas { width: 100px; height: 200px; } } 
+@media screen and (min-width: 400px) and (min-height: 400px)  { #tetris { font-size: 1.00em; width: 350px; } #menu { width: 150px; height: 300px; } #upcoming { width:  75px; height:  75px; } #canvas { width: 150px; height: 300px; } } 
+@media screen and (min-width: 500px) and (min-height: 500px)  { #tetris { font-size: 1.25em; width: 450px; } #menu { width: 200px; height: 400px; } #upcoming { width: 100px; height: 100px; } #canvas { width: 200px; height: 400px; } } 
+ 
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: lightgrey;
+}
+
+.contain {
+  width: 100%;
+  height: 100%;
+}
+
+.leftpane {
+    width: 30%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+    background-image: url('../images/images.jpg');
+    background-color: rgba(128, 128, 128, 0.5);
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.middlepane {
+    width: 50%;
+    height: 100%;
+    float: left;
+    background-size: cover;
+  background-image: url('../images/2.png');
+    background-color: lightblue;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.rightpane {
+  width: 20%;
+  height: 100%;
+  position: relative;
+  float: right;
+  background-size: cover;
+  background-image: url('../images/background.jpg');
+  background-color: rgba(255, 179, 179, 0.5);
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.slider-holder{
+    width: 300px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    text-align: center;
+    overflow: hidden;
+}
+       
+.image-holder {
+    width: 2400px;
+    height: 200px;
+    clear: both;
+    position: relative;
+   
+    -webkit-transition: left 2s;
+    -moz-transition: left 2s;
+    -o-transition: left 2s;
+    transition: left 2s;
+}
+       
+.slider-image{
+  width: 300px;
+  height: 200px;
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+}
+       
+#slider-image-1:target ~ .image-holder
+{
+    left: 0px;
+}
+
+#slider-image-2:target ~ .image-holder
+{
+    left: -300px;
+}
+#slider-image-3:target ~ .image-holder
+{
+    left: -600px;
+}
+#slider-image-4:target ~ .image-holder
+{
+    left: -900px;
+}
+#slider-image-5:target ~ .image-holder
+{
+    left: -1200px;
+}
+#slider-image-6:target ~ .image-holder
+{
+    left: -1500px;
+}
+#slider-image-7:target ~ .image-holder
+{
+    left: -1800px;
+}
+#slider-image-8:target ~ .image-holder
+{
+    left: -2100px;
+}
+
+.button-holder
+{
+    position: relative;
+    top: -20px;
+}
+
+.slider-change
+{
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: brown;
+}
+
+#maxMath {
+  color: rgba(255,127,80,0.9);
+}
+
+#exe {
+  color: rgba(124, 10, 22, 1);
+  cursor: pointer;
+}
+
+#t {
+  margin-top: 70px;
+  color: black;
+  text-align: center;
+}
+
+#two:hover, #snakeG:hover, #breakout1:hover, #break:hover, #cross:hover, #tetris1:hover, #bob:hover, #hextris:hover, #tower:hover {
+  cursor: pointer;
+}
+
+#s {
+  color: rgba(255,255,240,0.8);
+}
+
+#exe:hover {
+  text-decoration: underline;
+}
+
+.slide-holder , .image-holder {
+
+    -webkit-animation-name: autoplay;
+    animation-name: autoplay;
+
+    /* This will change the time it takes to move to next slide */
+
+    -webkit-animation-duration: 14s;
+
+    animation-duration: 14s;
+
+    -webkit-animation-iteration-count: infinite;
+
+    animation-iteration-count: infinite;
+  }
+
+@-webkit-keyframes
+  autoplay {   /* position of the first slide */
+    0% {
+   left: 0;
+  }
+    /* position of the second slide */
+    10% {
+   left: -300px;
+  }
+  20% {
+    left: -600px;
+  }
+  30% {
+    left: -900px;
+  }
+  40% {
+    left: -1200px;
+  }
+  50% {
+    left: -1500px;
+  }
+  60% {
+    left: -1800px;
+  }
+  70% {
+    left: -2100px;
+  }
+} 
+
+@keyframes
+  autoplay {   /* position of the first slide */
+    0% {
+   left: 0;
+  }
+    /* position of the second slide */
+  10% {
+   left: -300px;
+  }
+  20% {
+    left: -600px;
+  }
+  30% {
+    left: -900px;
+  }
+  40% {
+    left: -1200px;
+  }
+  50% {
+    left: -1500px;
+  }
+  60% {
+    left: -1800px;
+  }
+  70% {
+    left: -2100px;
+  }
+} 
+
+@media (max-width:   800px)  { 
+  .leftpane{
+    display: block;
+    float: none;
+    width: 100%;
+  }
+  .rightpane {
+    display: block;
+    float: none;
+    width: 100%;
+    text-align: center;
+  }
+  .middlepane {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+}
+
+#parent {
+  cursor: pointer;
+  border: outset;
+  background-color: darkgrey;
+  font-size: large;
+}
+
+#parent #popup {
+  display: none;
+}
+
+#parent:hover #popup {
+  display: block;
+}
